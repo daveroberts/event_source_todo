@@ -1,6 +1,6 @@
 class EventLogger
-  def self.add_event(c, play_event=true)
-    return unless c.is_valid?
+  def self.add_event(c)
+    return false unless c.is_valid?
     current_version = 0
     if EventLog.count == 0
       current_version = 0
@@ -14,12 +14,12 @@ class EventLogger
     e.event_params = YAML::dump(c.options)
     e.event_number = next_version
     e.save!
-    play_log if play_event
+    play
   end
   def self.play_command(c)
     return c.run_command if c.is_valid?
   end
-  def self.play_log
+  def self.play
     event_version = EventVersionNumber.first
     current_version = event_version.version
     loop do
