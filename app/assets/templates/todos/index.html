@@ -1,0 +1,15 @@
+<h1>Todos</h1>
+
+<ul>
+  <li ng-repeat="todo in todos">
+  {{todo.title}}<span ng-show="todo.description"> - {{todo.description}}</span><button ng-click="destroy(todo)">Destroy</button>
+  </li>
+</ul>
+
+<input type="text" ng-model="new_todo.title" />
+<button ng-click="create(new_todo)">Create Todo</button>
+
+
+
+
+{{todos}}

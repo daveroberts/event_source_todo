@@ -11,19 +11,22 @@ class TodosController < ApplicationController
     params[:guid] ||= SecureRandom.uuid
     c = CreateTodoCommand.new({title: params[:title], guid: params[:guid]})
     if (EventLogger.add_event(c))
-      return json: c.todo
+      render json: c.todo
     else
-      return json: {errors: c.errors}
+      render json: {errors: c.errors}
     end
   end
   def update
   end
   def destroy
-    c = DestroyTodoCommand.new({guid: params[:guid]})
+    todo = Todo.find(params[:id])
+    guid = todo.guid
+    #c = DestroyTodoCommand.new({guid: params[:guid]})
+    c = DestroyTodoCommand.new({guid: guid})
     if (EventLogger.add_event(c))
       head :no_content
     else
-      return json: {errors: c.errors}
+      render json: {errors: c.errors}
     end
   end
 end

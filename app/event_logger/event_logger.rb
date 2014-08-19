@@ -14,7 +14,7 @@ class EventLogger
     e.event_params = YAML::dump(c.options)
     e.event_number = next_version
     e.save!
-    play
+    return play
   end
   def self.play_command(c)
     return c.run_command if c.is_valid?
@@ -34,5 +34,6 @@ class EventLogger
       current_version = current_version + 1
       event_version.update_column(:version, current_version)
     end
+    return true
   end
 end
