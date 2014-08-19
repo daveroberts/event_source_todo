@@ -1,0 +1,7 @@
+env RAILS_ENV=development bundle exec rake db:drop
+env RAILS_ENV=development_event_log bundle exec rake db:drop
+env RAILS_ENV=development bundle exec rake db:migrate
+env RAILS_ENV=development_event_log bundle exec rake db:migrate
+env RAILS_ENV=development bundle exec rake db:seed
+rails c
+
